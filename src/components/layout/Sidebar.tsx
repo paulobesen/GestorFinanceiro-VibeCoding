@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { LayoutDashboard, CreditCard, Tag, BarChart2, X, Menu } from 'lucide-react'
+import { LayoutDashboard, CreditCard, Tag, BarChart2, X, Menu, Crown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
@@ -11,6 +11,7 @@ const navItems = [
   { href: '/entries', label: 'Lançamentos', icon: CreditCard },
   { href: '/classifications', label: 'Classificações', icon: Tag },
   { href: '/reports', label: 'Relatórios', icon: BarChart2 },
+  { href: '/subscription', label: 'Assinatura', icon: Crown },
 ]
 
 export default function Sidebar() {

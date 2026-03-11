@@ -52,7 +52,7 @@ export default function HeroSection() {
             href="/register"
             className="group relative px-8 py-4 rounded-2xl text-base font-bold text-white bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 transition-all duration-300 shadow-2xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 flex items-center gap-2"
           >
-            Comece Gratuitamente
+            Comece por R$ 1,00
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link

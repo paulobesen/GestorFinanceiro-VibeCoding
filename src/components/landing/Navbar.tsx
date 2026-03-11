@@ -74,7 +74,7 @@ export default function Navbar() {
               href="/register"
               className="relative group px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
             >
-              Começar Grátis
+              Promoção R$ 1,00
             </Link>
           </div>
 
@@ -119,7 +119,7 @@ export default function Navbar() {
                 href="/register"
                 className="text-center px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 transition-all duration-300"
               >
-                Começar Grátis
+                Promoção R$ 1,00
               </Link>
             </div>
           </div>
