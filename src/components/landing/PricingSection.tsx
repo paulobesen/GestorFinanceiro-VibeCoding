@@ -1,60 +1,65 @@
 'use client'
 
 import Link from 'next/link'
-import { Check, Star, Zap, Crown } from 'lucide-react'
+import { Check, Star, Zap, Crown, Sparkles, Tag } from 'lucide-react'
 
 const plans = [
   {
-    name: 'Básico',
+    name: 'Promoção',
     icon: Star,
-    price: 'Grátis',
-    priceDetail: 'para sempre',
-    description: 'Ideal para começar a organizar suas finanças pessoais.',
+    price: 'R$ 1,00',
+    originalPrice: 'R$ 19,90',
+    priceDetail: '/30 dias',
+    description: 'Oferta especial por tempo limitado! Acesso completo por apenas R$ 1,00.',
     color: 'cyan',
     gradient: 'from-cyan-500 to-blue-500',
-    borderColor: 'border-slate-700/30',
-    bgHighlight: '',
-    features: [
-      'Dashboard com resumo financeiro',
-      'Até 50 lançamentos por mês',
-      '5 classificações personalizadas',
-      'Relatórios básicos mensais',
-      'Acesso via celular e desktop',
-    ],
-    cta: 'Começar Grátis',
-    ctaStyle:
-      'bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 hover:border-cyan-500/30',
-    popular: false,
-  },
-  {
-    name: 'Profissional',
-    icon: Zap,
-    price: 'R$ 19,90',
-    priceDetail: '/mês',
-    description: 'Para quem leva a sério o controle financeiro e quer resultados.',
-    color: 'violet',
-    gradient: 'from-cyan-500 to-violet-500',
     borderColor: 'border-cyan-500/30',
     bgHighlight: 'ring-2 ring-cyan-500/20',
     features: [
-      'Tudo do plano Básico',
+      'Dashboard completo com gráficos',
       'Lançamentos ilimitados',
       'Classificações ilimitadas',
       'Lançamentos recorrentes',
       'Relatórios avançados',
       'Fechamento mensal',
       'Gráficos de evolução',
-      'Suporte prioritário por email',
+      'Acesso via celular e desktop',
     ],
-    cta: 'Assinar Agora',
+    cta: '🔥 Aproveitar Promoção',
     ctaStyle:
       'bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40',
     popular: true,
+    isPromo: true,
+  },
+  {
+    name: 'Profissional',
+    icon: Zap,
+    price: 'R$ 19,90',
+    originalPrice: null,
+    priceDetail: '/mês',
+    description: 'Para quem leva a sério o controle financeiro e quer resultados.',
+    color: 'violet',
+    gradient: 'from-cyan-500 to-violet-500',
+    borderColor: 'border-slate-700/30',
+    bgHighlight: '',
+    features: [
+      'Tudo da Promoção',
+      'Suporte prioritário por email',
+      'Exportação de relatórios',
+      'Múltiplas classificações avançadas',
+      'Relatórios personalizados',
+    ],
+    cta: 'Assinar Agora',
+    ctaStyle:
+      'bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 hover:border-violet-500/30',
+    popular: false,
+    isPromo: false,
   },
   {
     name: 'Empresarial',
     icon: Crown,
     price: 'R$ 49,90',
+    originalPrice: null,
     priceDetail: '/mês',
     description: 'Solução completa para profissionais e pequenos negócios.',
     color: 'amber',
@@ -64,17 +69,16 @@ const plans = [
     features: [
       'Tudo do plano Profissional',
       'Múltiplas contas financeiras',
-      'Relatórios personalizados',
-      'Exportação de dados (PDF, Excel)',
       'API de integração',
       'Suporte prioritário 24/7',
       'Consultoria financeira mensal',
       'Backup automático de dados',
     ],
-    cta: 'Falar com Vendas',
+    cta: 'Assinar Agora',
     ctaStyle:
       'bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 hover:border-amber-500/30',
     popular: false,
+    isPromo: false,
   },
 ]
 
@@ -90,18 +94,18 @@ export default function PricingSection() {
         {/* Section Header */}
         <div className="text-center mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6">
-            <Zap className="w-4 h-4 text-cyan-400" />
-            <span className="text-cyan-300 text-sm font-medium">Planos & Preços</span>
+            <Sparkles className="w-4 h-4 text-cyan-400" />
+            <span className="text-cyan-300 text-sm font-medium">Oferta Especial</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6">
-            Escolha o plano{' '}
+            Comece por apenas{' '}
             <span className="bg-gradient-to-r from-cyan-300 to-violet-400 bg-clip-text text-transparent">
-              perfeito para você
+              R$ 1,00
             </span>
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Comece gratuitamente e evolua conforme suas necessidades. Sem surpresas, sem taxas
-            escondidas.
+            Promoção exclusiva: 30 dias de acesso completo ao Gestor Financeiro por apenas 1 real.
+            Sem surpresas, sem taxas escondidas.
           </p>
         </div>
 
@@ -117,8 +121,9 @@ export default function PricingSection() {
                 {/* Popular Badge */}
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <div className="bg-gradient-to-r from-cyan-500 to-violet-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg shadow-cyan-500/25">
-                      MAIS POPULAR
+                    <div className="bg-gradient-to-r from-cyan-500 to-violet-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg shadow-cyan-500/25 flex items-center gap-1">
+                      <Tag className="w-3 h-3" />
+                      PROMOÇÃO
                     </div>
                   </div>
                 )}
@@ -135,11 +140,20 @@ export default function PricingSection() {
 
                 {/* Price */}
                 <div className="mb-4">
-                  <div className="flex items-baseline gap-1">
+                  <div className="flex items-baseline gap-2">
+                    {plan.originalPrice && (
+                      <span className="text-lg text-slate-500 line-through">{plan.originalPrice}</span>
+                    )}
                     <span className="text-3xl sm:text-4xl font-extrabold text-white">{plan.price}</span>
                     <span className="text-sm text-slate-400">{plan.priceDetail}</span>
                   </div>
                   <p className="text-sm text-slate-500 mt-2">{plan.description}</p>
+                  {plan.isPromo && (
+                    <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                      <Sparkles className="w-3 h-3 text-emerald-400" />
+                      <span className="text-xs text-emerald-300 font-medium">Economize 95% — Oferta por tempo limitado</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Divider */}
@@ -172,7 +186,7 @@ export default function PricingSection() {
         {/* Trust indicators */}
         <div className="mt-12 text-center">
           <p className="text-sm text-slate-500">
-            Cancele a qualquer momento · Sem compromisso · Garantia de 30 dias
+            Pagamento seguro via Stripe · Cancele a qualquer momento · Sem compromisso
           </p>
         </div>
       </div>

@@ -41,15 +41,33 @@ export async function middleware(request: NextRequest) {
     request.nextUrl.pathname.startsWith('/reset-password')
 
   const isLandingPage = request.nextUrl.pathname === '/landing'
+  const isApiRoute = request.nextUrl.pathname.startsWith('/api/')
+  const isSubscriptionPage = request.nextUrl.pathname === '/subscription'
 
   const isPublicPage = isAuthPage || isLandingPage
 
-  if (!session && !isPublicPage) {
+  if (!session && !isPublicPage && !isApiRoute) {
     return NextResponse.redirect(new URL('/landing', request.url))
   }
 
   if (session && isAuthPage) {
     return NextResponse.redirect(new URL('/', request.url))
+  }
+
+  // For authenticated users on dashboard pages (not subscription page, not API),
+  // check if they have an active subscription
+  if (session && !isPublicPage && !isApiRoute && !isSubscriptionPage) {
+    const { data: subscription } = await supabase
+      .from('subscriptions')
+      .select('status, current_period_end')
+      .eq('user_id', session.user.id)
+      .single()
+
+    const isActive = subscription?.status === 'active' || subscription?.status === 'trialing'
+
+    if (!isActive) {
+      return NextResponse.redirect(new URL('/subscription', request.url))
+    }
   }
 
   return response
