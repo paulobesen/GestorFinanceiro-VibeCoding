@@ -40,8 +40,12 @@ export async function middleware(request: NextRequest) {
     request.nextUrl.pathname.startsWith('/register') ||
     request.nextUrl.pathname.startsWith('/reset-password')
 
-  if (!session && !isAuthPage) {
-    return NextResponse.redirect(new URL('/login', request.url))
+  const isLandingPage = request.nextUrl.pathname === '/landing'
+
+  const isPublicPage = isAuthPage || isLandingPage
+
+  if (!session && !isPublicPage) {
+    return NextResponse.redirect(new URL('/landing', request.url))
   }
 
   if (session && isAuthPage) {
