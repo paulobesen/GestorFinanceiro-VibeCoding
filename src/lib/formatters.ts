@@ -6,7 +6,8 @@ export function formatCurrency(value: number): string {
 }
 
 export function formatDate(date: string): string {
-  const [year, month, day] = date.split('-')
+  if (!date || !/^\d{4}-\d{2}-\d{2}/.test(date)) return date ?? ''
+  const [year, month, day] = date.split('T')[0].split('-')
   return `${day}/${month}/${year}`
 }
 

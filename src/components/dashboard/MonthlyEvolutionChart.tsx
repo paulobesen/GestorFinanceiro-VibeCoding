@@ -45,7 +45,7 @@ export default function MonthlyEvolutionChart({ data }: MonthlyEvolutionChartPro
                 expense: 'Despesas',
                 balance: 'Saldo',
               }
-              return [formatCurrency(Number(value ?? 0)), labels[String(name)] ?? String(name)]
+              return [formatCurrency(value !== undefined && value !== null ? Number(value) : 0), labels[String(name)] ?? String(name)]
             }}
           />
           <Legend
