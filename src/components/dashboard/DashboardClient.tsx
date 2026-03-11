@@ -171,8 +171,10 @@ export default function DashboardClient({ userId }: DashboardClientProps) {
     <div className="space-y-6">
       {notification && (
         <div
-          className={`fixed top-4 right-4 p-4 rounded-lg text-white z-50 shadow-lg ${
-            notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'
+          className={`fixed top-4 right-4 p-4 rounded-lg text-white z-50 shadow-xl border ${
+            notification.type === 'success'
+              ? 'bg-emerald-600 border-emerald-500'
+              : 'bg-red-600 border-red-500'
           }`}
         >
           {notification.message}
@@ -184,7 +186,7 @@ export default function DashboardClient({ userId }: DashboardClientProps) {
         <div className="flex items-center gap-3 flex-wrap">
           <MonthSelector year={year} month={month} onChange={(y, m) => { setYear(y); setMonth(m) }} />
           {isMonthClosed && (
-            <span className="flex items-center gap-1 text-xs bg-amber-50 text-amber-700 border border-amber-200 px-2 py-1 rounded-full">
+            <span className="flex items-center gap-1 text-xs bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2 py-1 rounded-full">
               <Lock size={12} />
               Mês encerrado
             </span>
@@ -194,7 +196,7 @@ export default function DashboardClient({ userId }: DashboardClientProps) {
           {isMonthClosed ? (
             <button
               onClick={handleReopenMonth}
-              className="flex items-center gap-2 text-sm bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1.5 rounded-lg hover:bg-amber-100 transition-colors"
+              className="flex items-center gap-2 text-sm bg-amber-500/10 text-amber-400 border border-amber-500/30 px-3 py-1.5 rounded-lg hover:bg-amber-500/20 transition-colors"
             >
               <Unlock size={14} />
               Reabrir Mês
@@ -202,7 +204,7 @@ export default function DashboardClient({ userId }: DashboardClientProps) {
           ) : (
             <button
               onClick={handleCloseMonth}
-              className="flex items-center gap-2 text-sm bg-gray-800 text-white px-3 py-1.5 rounded-lg hover:bg-gray-900 transition-colors"
+              className="flex items-center gap-2 text-sm bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-600 transition-colors border border-slate-600"
             >
               <Lock size={14} />
               Encerrar Mês
@@ -212,8 +214,14 @@ export default function DashboardClient({ userId }: DashboardClientProps) {
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center py-16 text-gray-400">
-          Carregando...
+        <div className="flex items-center justify-center py-24">
+          <div className="flex flex-col items-center gap-4">
+            <div className="relative">
+              <span className="w-12 h-12 border-2 border-slate-700 border-t-blue-500 rounded-full animate-spin block" />
+              <span className="w-12 h-12 border-2 border-transparent border-b-violet-500 rounded-full animate-spin absolute inset-0" style={{ animationDirection: 'reverse', animationDuration: '1.2s' }} />
+            </div>
+            <span className="text-slate-400 text-sm">Carregando dashboard...</span>
+          </div>
         </div>
       ) : (
         <>
@@ -227,12 +235,12 @@ export default function DashboardClient({ userId }: DashboardClientProps) {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl border border-gray-200 p-5">
-              <h3 className="text-sm font-semibold text-gray-700 mb-4">Receitas por Classificação</h3>
+            <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5">
+              <h3 className="text-sm font-semibold text-slate-300 mb-4">Receitas por Classificação</h3>
               <EntriesByClassification data={incomeSummaries} type="income" />
             </div>
-            <div className="bg-white rounded-xl border border-gray-200 p-5">
-              <h3 className="text-sm font-semibold text-gray-700 mb-4">Despesas por Classificação</h3>
+            <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5">
+              <h3 className="text-sm font-semibold text-slate-300 mb-4">Despesas por Classificação</h3>
               <EntriesByClassification data={expenseSummaries} type="expense" />
             </div>
           </div>

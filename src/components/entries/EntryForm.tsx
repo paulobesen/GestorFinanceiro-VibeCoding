@@ -212,68 +212,68 @@ export default function EntryForm({
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 sticky top-0 bg-white">
-          <h2 className="text-base font-semibold text-gray-900">
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-slate-800 rounded-xl shadow-2xl border border-slate-700 w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700 sticky top-0 bg-slate-800 rounded-t-xl">
+          <h2 className="text-base font-semibold text-slate-100">
             {entry ? 'Editar Lançamento' : 'Novo Lançamento'}
           </h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-200 transition-colors">
             <X size={20} />
           </button>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4">
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg text-sm">
               {error}
             </div>
           )}
 
           {/* Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Tipo</label>
+            <label className="block text-sm font-medium text-slate-300 mb-2">Tipo</label>
             <div className="flex gap-3">
               <label className="flex items-center gap-2 cursor-pointer">
-                <input type="radio" value="income" {...register('type')} />
-                <span className="text-sm text-green-700 font-medium">Receita</span>
+                <input type="radio" value="income" {...register('type')} className="accent-emerald-500" />
+                <span className="text-sm text-emerald-400 font-medium">Receita</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
-                <input type="radio" value="expense" {...register('type')} />
-                <span className="text-sm text-red-700 font-medium">Despesa</span>
+                <input type="radio" value="expense" {...register('type')} className="accent-rose-500" />
+                <span className="text-sm text-rose-400 font-medium">Despesa</span>
               </label>
             </div>
           </div>
 
           {/* Date */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Data</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Data</label>
             <input
               type="date"
               {...register('date')}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors [color-scheme:dark]"
             />
-            {errors.date && <p className="mt-1 text-xs text-red-600">{errors.date.message}</p>}
+            {errors.date && <p className="mt-1 text-xs text-red-400">{errors.date.message}</p>}
           </div>
 
           {/* Amount */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Valor (R$)</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Valor (R$)</label>
             <input
               type="text"
               {...register('amount')}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
               placeholder="0,00"
             />
-            {errors.amount && <p className="mt-1 text-xs text-red-600">{errors.amount.message}</p>}
+            {errors.amount && <p className="mt-1 text-xs text-red-400">{errors.amount.message}</p>}
           </div>
 
           {/* Classification */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Classificação</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Classificação</label>
             <select
               {...register('classification_id')}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
             >
               <option value="">Selecione...</option>
               {filteredClassifications.map((c) => (
@@ -281,19 +281,19 @@ export default function EntryForm({
               ))}
             </select>
             {errors.classification_id && (
-              <p className="mt-1 text-xs text-red-600">{errors.classification_id.message}</p>
+              <p className="mt-1 text-xs text-red-400">{errors.classification_id.message}</p>
             )}
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Descrição <span className="text-gray-400 font-normal">(opcional)</span>
+            <label className="block text-sm font-medium text-slate-300 mb-1">
+              Descrição <span className="text-slate-500 font-normal">(opcional)</span>
             </label>
             <input
               type="text"
               {...register('description')}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
               placeholder="Ex: Mercado, Aluguel..."
             />
           </div>
@@ -306,22 +306,22 @@ export default function EntryForm({
                   type="checkbox"
                   id="is_recurring"
                   {...register('is_recurring')}
-                  className="rounded border-gray-300"
+                  className="rounded border-slate-600 bg-slate-900 accent-blue-500"
                 />
-                <label htmlFor="is_recurring" className="text-sm font-medium text-gray-700 cursor-pointer">
+                <label htmlFor="is_recurring" className="text-sm font-medium text-slate-300 cursor-pointer">
                   Lançamento recorrente (mensal)
                 </label>
               </div>
 
               {watchIsRecurring && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Data de fim da recorrência <span className="text-gray-400 font-normal">(opcional — padrão: 12 meses)</span>
+                  <label className="block text-sm font-medium text-slate-300 mb-1">
+                    Data de fim da recorrência <span className="text-slate-500 font-normal">(opcional — padrão: 12 meses)</span>
                   </label>
                   <input
                     type="date"
                     {...register('recurrence_end_date')}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors [color-scheme:dark]"
                   />
                 </div>
               )}
@@ -331,17 +331,17 @@ export default function EntryForm({
           {/* Edit scope for recurring entries */}
           {entry?.is_recurring && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-slate-300 mb-2">
                 Aplicar alteração a:
               </label>
               <div className="flex gap-4">
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="radio" value="single" {...register('edit_scope')} />
-                  <span className="text-sm">Apenas este</span>
+                  <input type="radio" value="single" {...register('edit_scope')} className="accent-blue-500" />
+                  <span className="text-sm text-slate-300">Apenas este</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="radio" value="future" {...register('edit_scope')} />
-                  <span className="text-sm">Este e futuros</span>
+                  <input type="radio" value="future" {...register('edit_scope')} className="accent-blue-500" />
+                  <span className="text-sm text-slate-300">Este e futuros</span>
                 </label>
               </div>
             </div>
@@ -351,16 +351,21 @@ export default function EntryForm({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+              className="flex-1 border border-slate-600 text-slate-300 py-2 rounded-lg text-sm font-medium hover:bg-slate-700 transition-colors"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors"
+              className="flex-1 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white py-2 rounded-lg text-sm font-medium disabled:opacity-50 transition-all duration-200 flex items-center justify-center gap-2"
             >
-              {loading ? 'Salvando...' : 'Salvar'}
+              {loading ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Salvando...
+                </>
+              ) : 'Salvar'}
             </button>
           </div>
         </form>

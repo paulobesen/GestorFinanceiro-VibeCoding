@@ -30,17 +30,17 @@ export default function MonthSelector({ year, month, onChange }: MonthSelectorPr
     <div className="flex items-center gap-2">
       <button
         onClick={handlePrev}
-        className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+        className="p-1.5 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors"
         aria-label="Mês anterior"
       >
         <ChevronLeft size={18} />
       </button>
-      <span className="text-base font-semibold text-gray-800 min-w-40 text-center capitalize">
+      <span className="text-base font-semibold text-slate-200 min-w-40 text-center capitalize">
         {formatMonthYear(year, month)}
       </span>
       <button
         onClick={handleNext}
-        className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+        className="p-1.5 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors"
         aria-label="Próximo mês"
       >
         <ChevronRight size={18} />

@@ -21,13 +21,13 @@ export default function EntryFilters({
   classifications,
 }: EntryFiltersProps) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-4 flex flex-wrap gap-3">
+    <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 flex flex-wrap gap-3">
       <div>
-        <label className="block text-xs font-medium text-gray-500 mb-1">Tipo</label>
+        <label className="block text-xs font-medium text-slate-400 mb-1">Tipo</label>
         <select
           value={filterType}
           onChange={(e) => onFilterTypeChange(e.target.value as 'all' | 'income' | 'expense')}
-          className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-slate-900 border border-slate-600 rounded-lg px-3 py-1.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="all">Todos</option>
           <option value="income">Receitas</option>
@@ -36,11 +36,11 @@ export default function EntryFilters({
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-gray-500 mb-1">Classificação</label>
+        <label className="block text-xs font-medium text-slate-400 mb-1">Classificação</label>
         <select
           value={filterClassification}
           onChange={(e) => onFilterClassificationChange(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-slate-900 border border-slate-600 rounded-lg px-3 py-1.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="all">Todas</option>
           {classifications.map((c) => (

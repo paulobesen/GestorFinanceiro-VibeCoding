@@ -66,18 +66,18 @@ export default function ReportsClient({ userId }: ReportsClientProps) {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <h1 className="text-xl font-bold text-gray-900">Relatórios</h1>
+        <h1 className="text-xl font-bold text-slate-100">Relatórios</h1>
         <MonthSelector year={year} month={month} onChange={(y, m) => { setYear(y); setMonth(m) }} />
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 flex flex-wrap gap-3">
+      <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 flex flex-wrap gap-3">
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">Tipo</label>
+          <label className="block text-xs font-medium text-slate-400 mb-1">Tipo</label>
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value as 'all' | 'income' | 'expense')}
-            className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="bg-slate-900 border border-slate-600 rounded-lg px-3 py-1.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">Todos</option>
             <option value="income">Receitas</option>
@@ -85,11 +85,11 @@ export default function ReportsClient({ userId }: ReportsClientProps) {
           </select>
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">Classificação</label>
+          <label className="block text-xs font-medium text-slate-400 mb-1">Classificação</label>
           <select
             value={filterClassification}
             onChange={(e) => setFilterClassification(e.target.value)}
-            className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="bg-slate-900 border border-slate-600 rounded-lg px-3 py-1.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">Todas</option>
             {classifications.map((c) => (
@@ -101,59 +101,68 @@ export default function ReportsClient({ userId }: ReportsClientProps) {
 
       {/* Summary */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-          <p className="text-xs text-green-600 font-medium mb-1">Receitas</p>
-          <p className="text-lg font-bold text-green-700">{formatCurrency(totalIncome)}</p>
+        <div className="bg-gradient-to-br from-emerald-900/40 to-emerald-800/20 border border-emerald-700/30 rounded-xl p-4">
+          <p className="text-xs text-emerald-400 font-medium mb-1">Receitas</p>
+          <p className="text-lg font-bold text-emerald-400">{formatCurrency(totalIncome)}</p>
         </div>
-        <div className="bg-red-50 border border-red-200 rounded-xl p-4">
-          <p className="text-xs text-red-600 font-medium mb-1">Despesas</p>
-          <p className="text-lg font-bold text-red-700">{formatCurrency(totalExpense)}</p>
+        <div className="bg-gradient-to-br from-rose-900/40 to-rose-800/20 border border-rose-700/30 rounded-xl p-4">
+          <p className="text-xs text-rose-400 font-medium mb-1">Despesas</p>
+          <p className="text-lg font-bold text-rose-400">{formatCurrency(totalExpense)}</p>
         </div>
-        <div className={`border rounded-xl p-4 ${totalIncome - totalExpense >= 0 ? 'bg-blue-50 border-blue-200' : 'bg-red-50 border-red-200'}`}>
-          <p className={`text-xs font-medium mb-1 ${totalIncome - totalExpense >= 0 ? 'text-blue-600' : 'text-red-600'}`}>Saldo</p>
-          <p className={`text-lg font-bold ${totalIncome - totalExpense >= 0 ? 'text-blue-700' : 'text-red-700'}`}>
+        <div className={`border rounded-xl p-4 bg-gradient-to-br ${
+          totalIncome - totalExpense >= 0
+            ? 'from-blue-900/40 to-blue-800/20 border-blue-700/30'
+            : 'from-rose-900/40 to-rose-800/20 border-rose-700/30'
+        }`}>
+          <p className={`text-xs font-medium mb-1 ${totalIncome - totalExpense >= 0 ? 'text-blue-400' : 'text-rose-400'}`}>Saldo</p>
+          <p className={`text-lg font-bold ${totalIncome - totalExpense >= 0 ? 'text-blue-400' : 'text-rose-400'}`}>
             {formatCurrency(totalIncome - totalExpense)}
           </p>
         </div>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        <div className="px-5 py-3 border-b border-gray-200">
-          <h2 className="text-sm font-semibold text-gray-700">
+      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+        <div className="px-5 py-3 border-b border-slate-700">
+          <h2 className="text-sm font-semibold text-slate-300">
             Lançamentos de {formatMonthYear(year, month)} ({filtered.length})
           </h2>
         </div>
         {loading ? (
-          <div className="text-center py-10 text-gray-400 text-sm">Carregando...</div>
+          <div className="flex items-center justify-center py-16">
+            <div className="flex flex-col items-center gap-3">
+              <span className="w-8 h-8 border-2 border-slate-600 border-t-blue-500 rounded-full animate-spin" />
+              <span className="text-slate-400 text-sm">Carregando relatório...</span>
+            </div>
+          </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-10 text-gray-400 text-sm">Nenhum lançamento encontrado</div>
+          <div className="text-center py-10 text-slate-500 text-sm">Nenhum lançamento encontrado</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50 border-b border-gray-200">
-                  <th className="text-left px-5 py-2 text-xs font-medium text-gray-500">Data</th>
-                  <th className="text-left px-5 py-2 text-xs font-medium text-gray-500">Classificação</th>
-                  <th className="text-left px-5 py-2 text-xs font-medium text-gray-500">Descrição</th>
-                  <th className="text-left px-5 py-2 text-xs font-medium text-gray-500">Tipo</th>
-                  <th className="text-right px-5 py-2 text-xs font-medium text-gray-500">Valor</th>
+                <tr className="bg-slate-700/30 border-b border-slate-700">
+                  <th className="text-left px-5 py-2 text-xs font-medium text-slate-400">Data</th>
+                  <th className="text-left px-5 py-2 text-xs font-medium text-slate-400">Classificação</th>
+                  <th className="text-left px-5 py-2 text-xs font-medium text-slate-400">Descrição</th>
+                  <th className="text-left px-5 py-2 text-xs font-medium text-slate-400">Tipo</th>
+                  <th className="text-right px-5 py-2 text-xs font-medium text-slate-400">Valor</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-slate-700/30">
                 {filtered.map((entry) => (
-                  <tr key={entry.id} className="hover:bg-gray-50">
-                    <td className="px-5 py-2 text-gray-600">{formatDate(entry.date)}</td>
-                    <td className="px-5 py-2 text-gray-700">
+                  <tr key={entry.id} className="hover:bg-slate-700/20 transition-colors">
+                    <td className="px-5 py-2 text-slate-400">{formatDate(entry.date)}</td>
+                    <td className="px-5 py-2 text-slate-300">
                       {entry.classification?.name ?? '—'}
                     </td>
-                    <td className="px-5 py-2 text-gray-600">{entry.description || '—'}</td>
+                    <td className="px-5 py-2 text-slate-400">{entry.description || '—'}</td>
                     <td className="px-5 py-2">
                       <span
                         className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                           entry.type === 'income'
-                            ? 'bg-green-50 text-green-700'
-                            : 'bg-red-50 text-red-700'
+                            ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
+                            : 'bg-rose-500/10 text-rose-400 border border-rose-500/30'
                         }`}
                       >
                         {entry.type === 'income' ? 'Receita' : 'Despesa'}
@@ -161,7 +170,7 @@ export default function ReportsClient({ userId }: ReportsClientProps) {
                     </td>
                     <td
                       className={`px-5 py-2 text-right font-medium ${
-                        entry.type === 'income' ? 'text-green-600' : 'text-red-600'
+                        entry.type === 'income' ? 'text-emerald-400' : 'text-rose-400'
                       }`}
                     >
                       {formatCurrency(entry.amount)}

@@ -26,14 +26,14 @@ interface MonthlyEvolutionChartProps {
 
 export default function MonthlyEvolutionChart({ data }: MonthlyEvolutionChartProps) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5">
-      <h3 className="text-sm font-semibold text-gray-700 mb-4">Evolução Mensal (12 meses)</h3>
+    <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5">
+      <h3 className="text-sm font-semibold text-slate-300 mb-4">Evolução Mensal (12 meses)</h3>
       <ResponsiveContainer width="100%" height={280}>
         <ComposedChart data={data} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-          <XAxis dataKey="month" tick={{ fontSize: 11 }} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+          <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#94a3b8' }} />
           <YAxis
-            tick={{ fontSize: 11 }}
+            tick={{ fontSize: 11, fill: '#94a3b8' }}
             tickFormatter={(v: number) =>
               new Intl.NumberFormat('pt-BR', { notation: 'compact', currency: 'BRL' }).format(v)
             }
@@ -47,6 +47,7 @@ export default function MonthlyEvolutionChart({ data }: MonthlyEvolutionChartPro
               }
               return [formatCurrency(value !== undefined && value !== null ? Number(value) : 0), labels[String(name)] ?? String(name)]
             }}
+            contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '8px', color: '#f1f5f9' }}
           />
           <Legend
             formatter={(value) => {
@@ -55,7 +56,7 @@ export default function MonthlyEvolutionChart({ data }: MonthlyEvolutionChartPro
                 expense: 'Despesas',
                 balance: 'Saldo',
               }
-              return labels[value] ?? value
+              return <span style={{ color: '#94a3b8', fontSize: 12 }}>{labels[value] ?? value}</span>
             }}
           />
           <Bar dataKey="income" fill="#10B981" radius={[4, 4, 0, 0]} />
@@ -65,7 +66,7 @@ export default function MonthlyEvolutionChart({ data }: MonthlyEvolutionChartPro
             dataKey="balance"
             stroke="#3B82F6"
             strokeWidth={2}
-            dot={{ r: 3 }}
+            dot={{ r: 3, fill: '#3B82F6' }}
           />
         </ComposedChart>
       </ResponsiveContainer>
