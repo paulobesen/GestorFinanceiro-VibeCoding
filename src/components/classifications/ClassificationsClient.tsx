@@ -84,8 +84,10 @@ export default function ClassificationsClient({ userId }: ClassificationsClientP
     <div className="space-y-6">
       {notification && (
         <div
-          className={`fixed top-4 right-4 p-4 rounded-lg text-white z-50 shadow-lg ${
-            notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'
+          className={`fixed top-4 right-4 p-4 rounded-lg text-white z-50 shadow-xl border ${
+            notification.type === 'success'
+              ? 'bg-emerald-600 border-emerald-500'
+              : 'bg-red-600 border-red-500'
           }`}
         >
           {notification.message}
@@ -93,10 +95,10 @@ export default function ClassificationsClient({ userId }: ClassificationsClientP
       )}
 
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-bold text-gray-900">Classificações</h1>
+        <h1 className="text-xl font-bold text-slate-100">Classificações</h1>
         <button
           onClick={handleAdd}
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+          className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-lg shadow-blue-500/20"
         >
           <Plus size={16} />
           Nova Classificação
@@ -104,7 +106,12 @@ export default function ClassificationsClient({ userId }: ClassificationsClientP
       </div>
 
       {loading ? (
-        <div className="text-center py-10 text-gray-400 text-sm">Carregando...</div>
+        <div className="flex items-center justify-center py-16">
+          <div className="flex flex-col items-center gap-3">
+            <span className="w-8 h-8 border-2 border-slate-600 border-t-blue-500 rounded-full animate-spin" />
+            <span className="text-slate-400 text-sm">Carregando classificações...</span>
+          </div>
+        </div>
       ) : (
         <ClassificationList
           classifications={classifications}

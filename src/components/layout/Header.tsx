@@ -19,17 +19,17 @@ export default function Header({ userEmail }: HeaderProps) {
   }
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
+    <header className="bg-slate-900 border-b border-slate-800 px-6 py-3 flex items-center justify-between">
       <div className="md:hidden w-8" />
       <div className="flex-1" />
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2 text-sm text-gray-600">
+        <div className="flex items-center gap-2 text-sm text-slate-400">
           <User size={16} />
           <span className="hidden sm:inline">{userEmail}</span>
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 text-sm text-gray-600 hover:text-red-600 transition-colors px-3 py-1.5 rounded-lg hover:bg-red-50"
+          className="flex items-center gap-2 text-sm text-slate-400 hover:text-red-400 transition-colors px-3 py-1.5 rounded-lg hover:bg-red-500/10"
         >
           <LogOut size={16} />
           <span className="hidden sm:inline">Sair</span>

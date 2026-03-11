@@ -28,13 +28,13 @@ export default function Sidebar() {
             href={item.href}
             onClick={() => setMobileOpen(false)}
             className={cn(
-              'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+              'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200',
               isActive
-                ? 'bg-blue-50 text-blue-700'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                ? 'bg-gradient-to-r from-blue-600/30 to-violet-600/20 text-blue-400 border border-blue-500/30 shadow-sm'
+                : 'text-slate-400 hover:bg-slate-700/50 hover:text-slate-100'
             )}
           >
-            <Icon size={18} />
+            <Icon size={18} className={isActive ? 'text-blue-400' : ''} />
             {item.label}
           </Link>
         )
@@ -45,16 +45,18 @@ export default function Sidebar() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex flex-col w-56 bg-white border-r border-gray-200 h-screen">
-        <div className="px-4 py-5 border-b border-gray-200">
-          <h2 className="text-lg font-bold text-gray-900">💰 Gestor</h2>
+      <aside className="hidden md:flex flex-col w-56 bg-slate-900 border-r border-slate-800 h-screen">
+        <div className="px-4 py-5 border-b border-slate-800">
+          <h2 className="text-lg font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
+            💰 Gestor
+          </h2>
         </div>
         {sidebarContent}
       </aside>
 
       {/* Mobile toggle button */}
       <button
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow border border-gray-200"
+        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-slate-800 rounded-lg shadow-lg border border-slate-700 text-slate-300"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label="Toggle menu"
       >
@@ -65,13 +67,15 @@ export default function Sidebar() {
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 z-40 flex">
           <div
-            className="fixed inset-0 bg-black bg-opacity-25"
+            className="fixed inset-0 bg-black/60"
             onClick={() => setMobileOpen(false)}
           />
-          <aside className="relative z-50 flex flex-col w-56 bg-white shadow-xl">
-            <div className="px-4 py-5 border-b border-gray-200 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-gray-900">💰 Gestor</h2>
-              <button onClick={() => setMobileOpen(false)} aria-label="Fechar menu">
+          <aside className="relative z-50 flex flex-col w-56 bg-slate-900 shadow-2xl border-r border-slate-800">
+            <div className="px-4 py-5 border-b border-slate-800 flex items-center justify-between">
+              <h2 className="text-lg font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
+                💰 Gestor
+              </h2>
+              <button onClick={() => setMobileOpen(false)} aria-label="Fechar menu" className="text-slate-400 hover:text-slate-200">
                 <X size={20} />
               </button>
             </div>
