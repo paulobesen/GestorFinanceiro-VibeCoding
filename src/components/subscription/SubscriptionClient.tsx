@@ -283,8 +283,8 @@ export default function SubscriptionClient() {
                   <Sparkles className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">{getPlanDisplayName(subscription!.plan_name)}</h3>
-                  {getStatusBadge(subscription!.status)}
+                  <h3 className="text-xl font-bold text-white">{getPlanDisplayName(subscription?.plan_name ?? '')}</h3>
+                  {getStatusBadge(subscription?.status ?? 'inactive')}
                 </div>
               </div>
 

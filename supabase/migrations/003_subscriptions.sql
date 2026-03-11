@@ -43,11 +43,11 @@ CREATE POLICY "Users can view own subscription" ON subscriptions
   FOR SELECT USING (auth.uid() = user_id);
 
 CREATE POLICY "Service role can manage subscriptions" ON subscriptions
-  FOR ALL USING (true) WITH CHECK (true);
+  FOR ALL USING (auth.role() = 'service_role');
 
 -- RLS Policies for payment_history
 CREATE POLICY "Users can view own payment history" ON payment_history
   FOR SELECT USING (auth.uid() = user_id);
 
 CREATE POLICY "Service role can manage payment history" ON payment_history
-  FOR ALL USING (true) WITH CHECK (true);
+  FOR ALL USING (auth.role() = 'service_role');
