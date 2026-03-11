@@ -1,3 +1,4 @@
+-- Fix legacy table naming to ensure PostgREST exposes /rest/v1/classifications
 DO $$
 BEGIN
   IF to_regclass('public.classification') IS NOT NULL
